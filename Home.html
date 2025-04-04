@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body { font-family: Arial, sans-serif; padding: 20px; }
+      h1 { color: #3367d6; }
+      table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+      td, th { border: 1px solid #ccc; padding: 8px; text-align: left; }
+      a.button {
+        display: inline-block;
+        padding: 6px 12px;
+        background-color: #3367d6;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>📈 Your Client Reports</h1>
+    <div id="content">Loading...</div>
+
+    <script>
+  const userEmail = prompt("Enter your email to load reports:");
+
+  google.script.run.withSuccessHandler(function(response) {
+    console.log("Response from Apps Script:", response);
+
+    if (!response || !response.reports) {
+      document.getElementById("content").innerHTML = "<p>Error loading reports. Please try again later.</p>";
+      return;
+    }
+
+    const userEmail = response.userEmail;
+    const reports = response.reports;
+
+    let html = `<p><strong>Welcome, ${userEmail}</strong></p>`;
+
+    if (reports.length === 0) {
+      html += "<p>No reports found for your account.</p>";
+      document.getElementById("content").innerHTML = html;
+      return;
+    }
+
+    html += "<table><tr><th>Client</th><th>Period</th><th>PDF</th><th>Dashboard</th></tr>";
+    reports.forEach(row => {
+      html += `<tr>
+        <td>${row.client}</td>
+        <td>${row.period}</td>
+        <td><a class="button" href="${row.pdf}" target="_blank">Download</a></td>
+        <td><a class="button" href="${row.dashboard}" target="_blank">View</a></td>
+      </tr>`;
+    });
+    html += "</table>";
+    document.getElementById("content").innerHTML = html;
+  }).getClientReports(userEmail);
+</script>
+
+
+  </body>
+</html>
