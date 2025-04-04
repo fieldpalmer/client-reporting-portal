@@ -29,8 +29,8 @@ A fully-automated reporting engine built with Google Apps Script, Google Sheets,
 
 ## 🖥️ How It Works
 
-1. 📥 **Client data** is stored in a Google Sheet (`Client_Data`)
-2. 📄 A **report template** in Google Docs is populated dynamically
+1. 📥 **Client data** is stored in a [Google Sheet (`Client_Data`)](https://docs.google.com/spreadsheets/d/15jq8m6QBpQb1hOMVxTeJoxTVrbZQ-J8dcZPy6jooc6A/edit?usp=drive_link)
+2. 📄 [A **report template** in Google Docs](https://docs.google.com/document/d/1Mw3ulFIMcFM4T7bfEDgHvg8yz1yHzLEvQgDXcuyg72Y/edit?usp=drive_link) is populated dynamically
 3. 💾 The finished report is **saved as a PDF** to Drive
 4. 💌 The PDF is **emailed to one or more recipients**
 5. 📋 A record of the report is **logged in `Report_Logs`**
