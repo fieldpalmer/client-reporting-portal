@@ -1,0 +1,11 @@
+frontend/node_modules
+frontend/.env
+backend/app/credentials.json
+backend/app/aic-web-app-7557528e3b7a.json
+backend/app/venv
+backend/app/__pycache__
+backend/app/app.log
+backend/app/app.log.1
+backend/app/app.log.2
+backend/app/app.log.3
+    

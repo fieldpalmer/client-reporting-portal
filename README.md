@@ -12,18 +12,18 @@ A fully-automated reporting engine built with Google Apps Script, Google Sheets,
 ✅ Looker Studio dashboard integration  
 ✅ Organized Drive folders per client  
 ✅ Logging of every report generated  
-✅ Google Apps Script web app for clients to view/download reports  
+✅ Google Apps Script web app for clients to view/download reports
 
 ---
 
 ## 🔧 Tech Stack
 
-- **Google Apps Script**
-- **Google Sheets** (data source + log)
-- **Google Docs** (template engine)
-- **Google Drive** (PDF storage)
-- **Looker Studio** (interactive dashboards)
-- **HTML/CSS frontend** (via GAS Web App)
+-    **Google Apps Script**
+-    **Google Sheets** (data source + log)
+-    **Google Docs** (template engine)
+-    **Google Drive** (PDF storage)
+-    **Looker Studio** (interactive dashboards)
+-    **HTML/CSS frontend** (via GAS Web App)
 
 ---
 
@@ -40,47 +40,48 @@ A fully-automated reporting engine built with Google Apps Script, Google Sheets,
 
 ## 📷 Screenshots
 
-| Auto-Generated PDF | Client Web Portal |
-|--------------------|-------------------|
+| Auto-Generated PDF                                                 | Client Web Portal                                                  |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ |
 | ![PDF Sample](https://via.placeholder.com/400x250?text=Report+PDF) | ![Web App](https://via.placeholder.com/400x250?text=Client+Portal) |
 
 ---
 
 ## 🧠 Key Highlights
 
-- Uses **Google Workspace tools only** — no third-party dependencies
-- Client dashboards are **interactive, live-filtered Looker Studio reports**
-- Web App supports **multi-client access** via email filtering
-- Fully customizable and scalable
+-    Uses **Google Workspace tools only** — no third-party dependencies
+-    Client dashboards are **interactive, live-filtered Looker Studio reports**
+-    Web App supports **multi-client access** via email filtering
+-    Fully customizable and scalable
 
 ---
 
 ## 🧪 Dev Notes
 
-- Web App uses `google.script.run` to fetch reports from `Report_Logs`
-- Email field matching is case-insensitive
-- Google Docs template uses `{{placeholders}}` replaced via `.replaceText()`
-- Drive folders are auto-created per client
+-    Web App uses `google.script.run` to fetch reports from `Report_Logs`
+-    Email field matching is case-insensitive
+-    Google Docs template uses `{{placeholders}}` replaced via `.replaceText()`
+-    Drive folders are auto-created per client
 
 ---
 
 ## 🏁 Why I Built This
 
 As part of my portfolio, I wanted to showcase my expertise in:
-- Google Apps Script
-- Workflow automation
-- Document generation and delivery
-- Web app UX using built-in Google tools
-- Real-world client-facing product logic
+
+-    Google Apps Script
+-    Workflow automation
+-    Document generation and delivery
+-    Web app UX using built-in Google tools
+-    Real-world client-facing product logic
 
 ---
 
 ## 🔮 Future Features
 
-- Admin dashboard for batch re-runs or report regeneration  
-- Slack or email digests for internal teams  
-- Looker Studio usage tracking per client  
-- User authentication with Google Sign-In scopes  
+-    Admin dashboard for batch re-runs or report regeneration
+-    Slack or email digests for internal teams
+-    Looker Studio usage tracking per client
+-    User authentication with Google Sign-In scopes
 
 ---
 
@@ -93,7 +94,67 @@ As part of my portfolio, I wanted to showcase my expertise in:
 ## 🚀 Try It or Hire Me
 
 Want this for your agency or internal reporting workflow?  
-I'm available for freelance + contract work — [Let’s talk](mailto:gilbertfieldpalmer@gmail.com)
+I'm available for freelance + contract work — [Let's talk](mailto:gilbertfieldpalmer@gmail.com)
 
 ---
 
+# Google Workspace Automation Demo
+
+A modern React + Python application showcasing Google Workspace automation capabilities.
+
+## Features
+
+-    Modern, responsive UI built with React
+-    Python backend using FastAPI
+-    Google Workspace integration
+-    Client report management
+-    PDF generation and distribution
+-    Interactive dashboards
+
+## Project Structure
+
+```
+client-reporting-portal/
+├── frontend/           # React frontend application
+├── backend/            # Python FastAPI backend
+└── README.md          # Project documentation
+```
+
+## Setup Instructions
+
+### Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+### Backend Setup
+
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+## Environment Variables
+
+Create a `.env` file in the backend directory with:
+
+```
+GOOGLE_CLIENT_ID=your_client_id
+GOOGLE_CLIENT_SECRET=your_client_secret
+```
+
+## Google Workspace Setup
+
+1. Create a Google Cloud Project
+2. Enable the necessary APIs:
+     - Google Drive API
+     - Google Sheets API
+     - Google Docs API
+3. Configure OAuth 2.0 credentials
+4. Set up service account credentials
