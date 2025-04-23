@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 import os
 import logging
+import json
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
@@ -13,14 +14,19 @@ from dotenv import load_dotenv
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Load environment variables
 load_dotenv()
+
+# Get configuration from environment variables
+API_PORT = int(os.getenv('API_PORT', 8000))
+CORS_ORIGINS = os.getenv('CORS_ORIGINS', 'http://localhost:3000').split(',')
 
 app = FastAPI(title="Client Reporting Portal API")
 
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -49,25 +55,32 @@ SCOPES = [
 
 def get_google_service():
     try:
-        credentials_path = 'credentials.json'
-        if not os.path.exists(credentials_path):
-            logger.error(f"Credentials file not found at {credentials_path}")
-            raise FileNotFoundError(f"Credentials file not found at {credentials_path}")
+        credentials_path = os.getenv('GOOGLE_CREDENTIALS_PATH')
+        if not credentials_path:
+            raise ValueError("GOOGLE_CREDENTIALS_PATH environment variable is not set")
             
         credentials = service_account.Credentials.from_service_account_file(
-            credentials_path, scopes=SCOPES
+            credentials_path,
+            scopes=SCOPES
         )
-        return credentials
+        return build('sheets', 'v4', credentials=credentials)
     except Exception as e:
-        logger.error(f"Error loading credentials: {str(e)}")
+        logger.error(f"Error initializing Google service: {str(e)}")
         raise
 
 def get_drive_service():
     try:
-        credentials = get_google_service()
+        credentials_path = os.getenv('GOOGLE_CREDENTIALS_PATH')
+        if not credentials_path:
+            raise ValueError("GOOGLE_CREDENTIALS_PATH environment variable is not set")
+            
+        credentials = service_account.Credentials.from_service_account_file(
+            credentials_path,
+            scopes=SCOPES
+        )
         return build('drive', 'v3', credentials=credentials)
     except Exception as e:
-        logger.error(f"Error creating Drive service: {str(e)}")
+        logger.error(f"Error initializing Drive service: {str(e)}")
         raise
 
 @app.get("/api/sheets/{folder_id}", response_model=List[Sheet])
